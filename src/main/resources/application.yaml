@@ -1,0 +1,7 @@
+
+logging.level.org.springframework.web: DEBUG
+
+server:
+  shutdown: graceful
+
+msg: no external configuration has been loaded

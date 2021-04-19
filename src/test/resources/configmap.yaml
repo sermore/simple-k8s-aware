@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: simple-k8s-aware
+  namespace: default
+data:
+  application.yaml: |-
+    msg: The faulty configuration has been loaded!
+    # simulate liveness and readiness problems
+    state:
+      liveness.cron: '*/37 * * * * *'
+      readiness.cron: '*/17 * * * * *'

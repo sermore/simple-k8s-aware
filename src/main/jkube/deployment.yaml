@@ -1,0 +1,33 @@
+spec:
+  replicas: 1
+  template:
+    spec:
+      volumes:
+        - name: config
+          configMap:
+            name: ${project.artifactId}
+            items:
+              - key: application.yaml
+                path: application.yaml
+      containers:
+        - volumeMounts:
+            - name: config
+              mountPath: /workspace/config
+          livenessProbe:
+            failureThreshold: 2
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 2
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 5

@@ -1,0 +1,6 @@
+
+msg: The faulty configuration has been loaded!
+# simulate liveness and readiness problems
+state:
+  liveness.cron: '*/37 * * * * *'
+  readiness.cron: '*/17 * * * * *'
